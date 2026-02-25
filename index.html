@@ -1,0 +1,310 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./src/output.css" rel="stylesheet" />
+    <link href="./src/input.css" rel="stylesheet" />
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body class="relative">
+    <!-- navbar -->
+    <nav>
+      <div class="flex justify-between mt-6">
+        <div class="ml-5">
+          <i data-feather="align-justify" class="w-5 h-5 sm:w-7 sm:h-7"></i>
+        </div>
+        <div class="font-bold text-2xl font-serif">
+          <h1 class="sm:text-4xl">zelok</h1>
+        </div>
+        <div class="mr-5 relative klik">
+          <i data-feather="shopping-cart" class="w-5 h-5 sm:w-7 sm:h-7"></i>
+          <div
+            class="absolute w-4 h-4 bg-amber-300 rounded-4xl items-center justify-center top-0 left-2 card-shope flex hidden"
+          >
+            <p class="text-[10px] font-serif container-shope"></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- body -->
+
+    <section>
+      <div class="mt-7 flex gap-5 justify-center">
+        <div class="w-40 h-40 bg-amber-300 rounded-xl relative">
+          <div
+            class="flex items-center flex-col mt-4 text-white font-mono text-lg uppercase"
+          >
+            <h2>trending</h2>
+            <h2>products</h2>
+            <h2 class="font-bold text-5xl ml-15 opacity-20">zelo</h2>
+
+            <div class="absolute top-25 left-25">
+              <i data-feather="arrow-right" class="w-10 h-10"></i>
+            </div>
+          </div>
+        </div>
+        <div class="w-40 h-40 bg-red-500 rounded-xl relative">
+          <div
+            class="flex items-center flex-col mt-4 text-white font-mono text-lg uppercase"
+          >
+            <h2>sale</h2>
+            <h2>products</h2>
+            <h2 class="font-bold text-5xl ml-15 opacity-20">zelo</h2>
+
+            <div class="absolute top-25 left-25">
+              <i data-feather="arrow-right" class="w-10 h-10"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- judul card -->
+
+    <div class="text-xl font-bold ml-7 mt-5 uppercase font-sans sm:text-center">
+      <h1>popular products</h1>
+    </div>
+
+    <!-- card -->
+    <div
+      class="flex flex-col justify-center mt-4 gap-8 items-center sm:flex-row sm:flex-wrap"
+      id="container-card"
+    ></div>
+
+    <!-- halaman belanja -->
+    <div
+      id="menu"
+      dir="ltr"
+      class="w-70 h-screen bg-white shadow-xl absolute top-0 right-0 rounded-s-xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out"
+    >
+      <div class="flex justify-end mt-4 mr-3.5 remove">
+        <i data-feather="x"></i>
+      </div>
+      <div class="flex flex-col h-screen">
+        <div class="container-shoping flex-1 overflow-y-auto px-4">
+          <!-- Item cart akan dirender di sini -->
+        </div>
+
+        <div
+          class="w-full h-15 flex bg-amber-300 rounded-b-2xl text-center items-center justify-center keranjang hidden"
+        >
+          <h1 class="uppercase font-bold text-lg text-white">checkout</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- pitur co -->
+
+    <!-- js  -->
+    <script>
+      const data = [
+        {
+          name: "jaket puffer",
+          price: 100,
+          rating: 4.7,
+
+          images: "../aset/jaket2.jpeg",
+
+          qty: 1,
+        },
+        {
+          name: "jaket ",
+          price: 100,
+          rating: 4.8,
+
+          images: "../aset/jaket.jfif",
+
+          qty: 1,
+        },
+        {
+          name: "leather jacket",
+          price: 100,
+          rating: 4.3,
+
+          images: "../aset/jaket3.jfif",
+
+          qty: 1,
+        },
+        {
+          name: "jaket outdoor",
+          price: 100,
+          rating: 4.6,
+
+          images: "../aset/jaket4.png",
+
+          qty: 1,
+        },
+        {
+          name: "jaket outdor",
+          price: 100,
+          rating: 5,
+
+          images: "../aset/jaket5.jpg",
+          qty: 1,
+        },
+      ];
+
+      // ======== PEMAGIL ELEMET ======
+
+      const card = document.getElementById("container-card");
+
+      // ======== RANDER CARD =======
+
+      data.forEach((items, index) => {
+        card.innerHTML += `
+              <div class="w-80 h-72 rounded-2xl overflow-hidden ">
+                                <div
+                                  class="bg-cover bg-center w-full h-full relative"
+                          style="background-image: url('${items.images}')"
+                                >
+                                  <div class="absolute top-4 left-60 font-bold text-lg">
+                                    <p>⭐${items.rating}</p>
+                                  </div>
+                                  <div class="absolute top-50 text-white ml-6 uppercase font-bold">
+                                    <h1>${items.name}</h1>
+                                  </div>
+                                  <div class="absolute top-58 ml-8 bg-white w-20 rounded-3xl">
+                                    <h1 class="text-center font-bold">$${items.price}</h1>
+                                  </div>
+                                  <div
+                                    class="bg-black w-14 h-14 flex items-center justify-center absolute top-50 left-60 rounded-2xl tambah"
+                                     data-index="${index}"
+                                  >
+                                    <i data-feather="shopping-bag" class="text-amber-200"></i>
+                                  </div>
+                                </div>
+                              </div> `;
+      });
+
+      // ketika shoping card di klik menambah pesanan
+      const tombolTambah = document.querySelectorAll(".tambah");
+      const areaShoping = document.querySelector(".card-shope");
+      const shaja = document.querySelector(".container-shoping");
+      const tampil = document.querySelector(".container-shope");
+
+      let arr = [];
+      tombolTambah.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const index = this.dataset.index;
+          const prodk = data[index];
+          // cek apakah ada barang sudah masuk ke s
+          const cek = arr.find((items) => items.name === prodk.name);
+
+          if (cek) {
+            cek.qty += 1;
+          } else {
+            arr.push({ ...prodk, qty: 1 });
+          }
+          renderCart();
+          renderTotal();
+        });
+      });
+
+      function renderCart() {
+        shaja.innerHTML = "";
+        arr.forEach((items) => {
+          shaja.innerHTML += `<div class="flex justify-start mt-3">
+                          <div class="w-20 h-20 ml-6 rounded-full overflow-hidden ">
+                            <img
+                              src="${items.images}"
+                              alt="gambar"
+                              class="w-full h-full object-cover object-center"
+                            />
+                          </div>
+                          <div class="ml-4">
+                            <p class=" font-sans capitalize text-lg">${items.name}</p>
+
+                            <div class="flex gap-4 text-lg items-center hai">
+                              <p class="w-6 h-10 bg-amber-200 rounded-full flex items-center justify-center menambah" data-name="${items.name}">+</p>
+
+                              <p class="total">${items.qty}</p>
+
+                              <p class="w-6 h-10 bg-amber-200 rounded-full flex items-center justify-center mengurang" data-name="${items.name}">-</p>
+                            </div>
+
+                            <div class="uppercase font-bold ml-2">
+                              <h3>$ ${items.price * items.qty}</h3>
+                            </div>
+                          </div>
+                        </div>`;
+        });
+        ada();
+      }
+
+      // ======   ketika icont  shoping di cklik tampil =======
+
+      function renderTotal() {
+        const total = arr.reduce((sum, items) => sum + items.qty, 0);
+        if (total > 0) {
+          areaShoping.classList.remove("hidden");
+        } else {
+          areaShoping.classList.add("hidden");
+        }
+        tampil.textContent = total;
+      }
+
+      const klik = document.querySelector(".klik");
+      const cekout = document.getElementById("menu");
+      const hapus = document.querySelector(".remove");
+
+      klik.addEventListener("click", function () {
+        cekout.classList.remove("translate-x-full");
+      });
+
+      // ======= ketika x di klik halaman hilang
+      hapus.addEventListener("click", function () {
+        cekout.classList.add("translate-x-full");
+      });
+
+      // menambah dan mengurang produk
+
+      const cartContanier = document.querySelector(".container-shoping");
+      cartContanier.addEventListener("click", function (e) {
+        if (e.target.classList.contains("menambah")) {
+          const name = e.target.dataset.name;
+          const cari = arr.find((items) => items.name === name);
+          cari.qty++;
+        }
+        if (e.target.classList.contains("mengurang")) {
+          const name = e.target.dataset.name;
+          const cari = arr.find((items) => items.name === name);
+
+          if (cari && cari.qty > 0) {
+            cari.qty--;
+            arr = arr.filter((i) => i.qty > 0);
+          }
+        }
+        renderCart();
+        renderTotal();
+      });
+
+      // enghilangkan keranjang
+
+      const beli = document.querySelector(".keranjang");
+      function ada() {
+        const total = arr.reduce((sum, items) => sum + items.qty, 0);
+        if (total > 0) {
+          beli.classList.remove("hidden");
+        } else {
+          beli.classList.add("hidden");
+        }
+        tampil.textContent = total;
+      }
+
+      // ketika tombol di klik menyiman data ke lokal storace
+
+      beli.addEventListener("click", function () {
+        localStorage.setItem("checkoutItems", JSON.stringify(arr));
+        window.location.href = "checkout.html";
+        console.log("hai");
+      });
+    </script>
+
+    <!-- icont -->
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
